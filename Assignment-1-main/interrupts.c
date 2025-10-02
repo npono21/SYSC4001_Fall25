@@ -140,10 +140,10 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
     fprintf(file, "%d, %d, load address 0x%04X into the PC\n", *currentTime, TIME_TO_LOAD_ADDRESS, vectorTable[number - 1].vector);
     *currentTime += TIME_TO_LOAD_ADDRESS;
 
-    float limit = executionTime * 0.40;
-    int timeToSysCall = (rand() % 6) + limit;
-    int timeToTransferData = (rand() % 6) + limit;
-    int timeToCheckForErrors = executionTime - (timeToSysCall + timeToTransferData);
+    int limit = executionTime / (int) 2;
+    int timeToSysCall = (rand() % (executionTime / (int) 4 + 2)) + limit;
+    int timeToTransferData = executionTime - timeToSysCall;
+
 
     fprintf(file, "%d, %d, SYSCALL: run the ISR\n", *currentTime, timeToSysCall);
     *currentTime += timeToSysCall;
@@ -151,8 +151,11 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
     fprintf(file, "%d, %d, transfer data\n", *currentTime, timeToTransferData);
     *currentTime += timeToTransferData;
 
-    fprintf(file, "%d, %d, check for errors\n", *currentTime, timeToCheckForErrors);
-    *currentTime += timeToCheckForErrors;
+    fprintf(file, "%d, %d, context returned\n", *currentTime, TIME_TO_SAVE_CONTEXT);
+    *currentTime += TIME_TO_SAVE_CONTEXT;
+
+    fprintf(file, "%d, %d, switch to user mode\n", *currentTime, TIME_TO_SWITCH_KERNEL_MODE);
+    *currentTime += TIME_TO_SWITCH_KERNEL_MODE;
 
     fprintf(file, "%d, 1, IRET\n", *currentTime);
     (*currentTime)++;
@@ -173,6 +176,9 @@ void handleEndIO(FILE *file, int *currentTime, int executionTime, char *filtered
     fprintf(file, "%d, %d, switch to kernel mode\n", *currentTime, TIME_TO_SWITCH_KERNEL_MODE);
     *currentTime += TIME_TO_SWITCH_KERNEL_MODE;
 
+    fprintf(file, "%d, %d, context saved\n", *currentTime, TIME_TO_SAVE_CONTEXT);
+    *currentTime += TIME_TO_SAVE_CONTEXT;
+
     fprintf(file, "%d, %d, find vector %d in memory position 0x%04X\n", *currentTime, TIME_TO_FIND_VECTOR, number, vectorTable[number - 1].address);
     *currentTime += TIME_TO_FIND_VECTOR;
 
@@ -181,6 +187,12 @@ void handleEndIO(FILE *file, int *currentTime, int executionTime, char *filtered
 
     fprintf(file, "%d, %d, END_IO\n", *currentTime, executionTime);
     *currentTime += executionTime;
+
+    fprintf(file, "%d, %d, context returned\n", *currentTime, TIME_TO_SAVE_CONTEXT);
+    *currentTime += TIME_TO_SAVE_CONTEXT;
+
+    fprintf(file, "%d, %d, switch to user mode\n", *currentTime, TIME_TO_SWITCH_KERNEL_MODE);
+    *currentTime += TIME_TO_SWITCH_KERNEL_MODE;
 
     fprintf(file, "%d, 1, IRET\n", *currentTime);
     (*currentTime)++;
