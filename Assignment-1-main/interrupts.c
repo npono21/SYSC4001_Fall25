@@ -80,7 +80,7 @@ void removeCommas(const char *input, char *output)
     {
         if (input[i] == ',')
         {
-            break; // Stop copying when a comma is encountered
+            continue; // Skip comma
         }
         output[j++] = input[i]; // Copy non-comma character to output
     }
@@ -126,9 +126,8 @@ void handleCPU(FILE *file, int *currentTime, int executionTime)
 // Function to handle SYSCALL operations
 void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filteredOperation, VectorTable vectorTable[])
 {
-    int number;
+    int number = 0;
     sscanf(filteredOperation, "SYSCALL %d", &number);
-
     fprintf(file, "%d, %d, switch to kernel mode\n", *currentTime, TIME_TO_SWITCH_KERNEL_MODE);
     *currentTime += TIME_TO_SWITCH_KERNEL_MODE;
 
@@ -162,7 +161,7 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
 // Function to handle END_IO operations
 void handleEndIO(FILE *file, int *currentTime, int executionTime, char *filteredOperation, VectorTable vectorTable[])
 {
-    int number;
+    int number = 0;
     sscanf(filteredOperation, "END_IO %d", &number);
 
     fprintf(file, "%d, 1, check priority of interrupt\n", *currentTime);
@@ -212,6 +211,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    
+    
     char line[50]; // Store up to 50 events from the trace file
     int currentTime = 0;
     VectorTable vectorTable[100];
@@ -228,7 +229,7 @@ int main(int argc, char *argv[])
         removeCommas(line, filteredOperation);
 
         // Handle CPU, SYSCALL, and END_IO operations
-        if (strcmp(filteredOperation, "CPU") == 0)
+        if (strstr(filteredOperation, "CPU") != NULL)
         {
             handleCPU(file, &currentTime, executionTime);
         }
@@ -241,7 +242,7 @@ int main(int argc, char *argv[])
             handleEndIO(file, &currentTime, executionTime, filteredOperation, vectorTable);
         }
     }
-
+    
     fclose(inputFile);
     fclose(file);
 

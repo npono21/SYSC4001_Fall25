@@ -7,7 +7,7 @@
 #include <time.h>
 
 #define TIME_TO_SWITCH_KERNEL_MODE 1
-#define TIME_TO_SAVE_CONTEXT (rand() % 3) + 1
+#define TIME_TO_SAVE_CONTEXT 10
 #define TIME_TO_FIND_VECTOR 1
 #define TIME_TO_LOAD_ADDRESS 1
 #define TIME_TO_SYSCALL
