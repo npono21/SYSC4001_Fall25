@@ -20,7 +20,7 @@ typedef struct
 } VectorTable;
 
 // Reads our defined Vector Table address and write them into the VectorTable struct
-void createVectorTable(VectorTable vectorTable[]);
+void createVectorTable(VectorTable vectorTable[], FILE *vectorTableFile, int count);
 
 // This function will take the operation from trace.txt, ex. 'CPU,', and remove the commma for better processing later on
 void removeCommas(const char *input, char *output);
