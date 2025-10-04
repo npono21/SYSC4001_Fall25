@@ -8,9 +8,8 @@
 
 #define TIME_TO_SWITCH_KERNEL_MODE 1
 #define TIME_TO_SAVE_CONTEXT 10
-#define TIME_TO_FIND_VECTOR 1
+#define TIME_TO_FIND_VECTOR 25
 #define TIME_TO_LOAD_ADDRESS 1
-#define TIME_TO_SYSCALL
 
 // Defining our VectorTable struct which will contain all Vector Table addresses we need
 typedef struct
