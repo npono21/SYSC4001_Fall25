@@ -44,6 +44,13 @@ void createVectorTable(VectorTable vectorTable[], FILE *vectorTableFile, int lin
     free(vectors);
 }
 
+void createDelayArray(int *delayArray, FILE *delayFile){
+    int x = 1;
+    while(fscanf(delayFile, "%d", delayArray + 1) != EOF){
+        x++;
+    }
+}
+
 void removeCommas(const char *input, char *output)
 {
     int j = 0;
@@ -77,7 +84,7 @@ void handleCPU(FILE *file, int *currentTime, int executionTime)
     *currentTime += executionTime;
 }
 
-void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filteredOperation, VectorTable vectorTable[])
+void handleSysCall(FILE *file, int *currentTime, int *delayArray, char *filteredOperation, VectorTable vectorTable[])
 {
     int number = 0;
     sscanf(filteredOperation, "SYSCALL %d", &number);
@@ -89,7 +96,7 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
     *currentTime += TIME_TO_FIND_VECTOR;
     fprintf(file, "%d, %d, load address 0x%04X into the PC\n", *currentTime, TIME_TO_LOAD_ADDRESS, vectorTable[number - 1].vector);
     *currentTime += TIME_TO_LOAD_ADDRESS;
-
+    int executionTime = delayArray + number;
     int limit = executionTime / 2;
     int timeToSysCall = (rand() % (executionTime / 4 + 2)) + limit;
     int timeToTransferData = executionTime - timeToSysCall;
@@ -106,10 +113,12 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
     (*currentTime)++;
 }
 
-void handleEndIO(FILE *file, int *currentTime, int executionTime, char *filteredOperation, VectorTable vectorTable[])
+void handleEndIO(FILE *file, int *currentTime, int *delayArray, char *filteredOperation, VectorTable vectorTable[])
 {
     int number = 0;
     sscanf(filteredOperation, "END_IO %d", &number);
+
+    int executionTime = delayArray + number;
     fprintf(file, "%d, 1, check priority of interrupt\n", *currentTime);
     (*currentTime)++;
     fprintf(file, "%d, 1, check if masked\n", *currentTime);
@@ -166,6 +175,15 @@ int main(int argc, char *argv[])
         fclose(outputFile);
         return 1;
     }
+    FILE *delayTableFile = fopen("../device_table.txt", "r");
+    if (delayTableFile == NULL)
+    {
+        perror("Failed to open device table file");
+        fclose(inputFile);
+        fclose(outputFile);
+        fclose(vectorTableFile);
+        return 1;
+    }
 
     while ((c = getc(vectorTableFile)) != EOF)
         if (c == '\n')
@@ -173,6 +191,9 @@ int main(int argc, char *argv[])
 
     VectorTable vectorTable[100];
     createVectorTable(vectorTable, vectorTableFile, count);
+
+    int delayArray[50];
+    createDelayArray(delayArray, delayTableFile);
 
     char line[50];
     int currentTime = 0;
@@ -190,14 +211,15 @@ int main(int argc, char *argv[])
         if (strstr(filteredOperation, "CPU") != NULL)
             handleCPU(outputFile, &currentTime, executionTime);
         else if (strstr(filteredOperation, "SYSCALL") != NULL)
-            handleSysCall(outputFile, &currentTime, executionTime, filteredOperation, vectorTable);
+            handleSysCall(outputFile, &currentTime, delayArray, filteredOperation, vectorTable);
         else if (strstr(filteredOperation, "END_IO") != NULL)
-            handleEndIO(outputFile, &currentTime, executionTime, filteredOperation, vectorTable);
+            handleEndIO(outputFile, &currentTime, delayArray, filteredOperation, vectorTable);
     }
 
     fclose(inputFile);
     fclose(outputFile);
     fclose(vectorTableFile);
+    fclose(delayTableFile);
 
     printf("Simulation Over!\n");
     return 0;
