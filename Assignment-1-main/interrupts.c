@@ -91,7 +91,9 @@ void handleSysCall(FILE *file, int *currentTime, int executionTime, char *filter
     *currentTime += TIME_TO_LOAD_ADDRESS;
 
     int limit = executionTime / 2;
+
     int timeToSysCall = (rand() % (executionTime / 4 + 2)) + limit;
+
     int timeToTransferData = executionTime - timeToSysCall;
 
     fprintf(file, "%d, %d, SYSCALL: run the ISR\n", *currentTime, timeToSysCall);
@@ -135,6 +137,7 @@ void handleEndIO(FILE *file, int *currentTime, int executionTime, char *filtered
 int main(int argc, char *argv[])
 {
     int count = 0;
+    int deviceTableCount = 0;
     char c;
 
     if (argc != 2)
@@ -167,6 +170,22 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    FILE *deviceTableFile = fopen("../device_table.txt", "r");
+    if (deviceTableFile == NULL)
+    {
+        perror("Failed to open device table file");
+        fclose(inputFile);
+        fclose(outputFile);
+        fclose(vectorTableFile);
+        return 1; // exit here
+    }
+
+    deviceTableCount = 0;
+    rewind(deviceTableFile);
+    while ((c = getc(deviceTableFile)) != EOF)
+        if (c == '\n')
+            deviceTableCount++;
+
     while ((c = getc(vectorTableFile)) != EOF)
         if (c == '\n')
             count++;
@@ -190,7 +209,29 @@ int main(int argc, char *argv[])
         if (strstr(filteredOperation, "CPU") != NULL)
             handleCPU(outputFile, &currentTime, executionTime);
         else if (strstr(filteredOperation, "SYSCALL") != NULL)
-            handleSysCall(outputFile, &currentTime, executionTime, filteredOperation, vectorTable);
+        {
+            rewind(deviceTableFile);
+            char buffer[100];
+            int currentLine = 1;
+            int value = 0;
+
+            while (fgets(buffer, sizeof(buffer), deviceTableFile))
+            {
+                if (currentLine == executionTime) // executionTime used as line number
+                {
+                    if (sscanf(buffer, "%d", &value) != 1)
+                    {
+                        fprintf(stderr, "Failed to read value from line %d\n", executionTime);
+                        fclose(deviceTableFile);
+                        return -1;
+                    }
+                    break;
+                }
+                currentLine++;
+            }
+
+            handleSysCall(outputFile, &currentTime, value, filteredOperation, vectorTable);
+        }
         else if (strstr(filteredOperation, "END_IO") != NULL)
             handleEndIO(outputFile, &currentTime, executionTime, filteredOperation, vectorTable);
     }
