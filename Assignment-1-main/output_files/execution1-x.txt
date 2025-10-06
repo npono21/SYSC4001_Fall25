@@ -3,8 +3,8 @@
 52, 10, context saved
 62, 25, find vector 14 in memory position 0x001C
 87, 1, load address 0x06C7 into the PC
-88, 400, SYSCALL: run the ISR
-488, 236, transfer data
+88, 420, SYSCALL: run the ISR
+508, 216, transfer data
 724, 10, context returned
 734, 1, switch to user mode
 735, 1, IRET
@@ -24,8 +24,8 @@
 913, 10, context saved
 923, 25, find vector 19 in memory position 0x0026
 948, 1, load address 0x060A into the PC
-949, 88, SYSCALL: run the ISR
-1037, 35, transfer data
+949, 63, SYSCALL: run the ISR
+1012, 60, transfer data
 1072, 10, context returned
 1082, 1, switch to user mode
 1083, 1, IRET
@@ -45,8 +45,8 @@
 1215, 10, context saved
 1225, 25, find vector 7 in memory position 0x000E
 1250, 1, load address 0x0639 into the PC
-1251, 145, SYSCALL: run the ISR
-1396, 120, transfer data
+1251, 158, SYSCALL: run the ISR
+1409, 107, transfer data
 1516, 10, context returned
 1526, 1, switch to user mode
 1527, 1, IRET
@@ -66,8 +66,8 @@
 1623, 10, context saved
 1633, 25, find vector 16 in memory position 0x0020
 1658, 1, load address 0x0584 into the PC
-1659, 45, SYSCALL: run the ISR
-1704, 23, transfer data
+1659, 37, SYSCALL: run the ISR
+1696, 31, transfer data
 1727, 10, context returned
 1737, 1, switch to user mode
 1738, 1, IRET
@@ -87,8 +87,8 @@
 1957, 10, context saved
 1967, 25, find vector 8 in memory position 0x0010
 1992, 1, load address 0x00BD into the PC
-1993, 89, SYSCALL: run the ISR
-2082, 63, transfer data
+1993, 84, SYSCALL: run the ISR
+2077, 68, transfer data
 2145, 10, context returned
 2155, 1, switch to user mode
 2156, 1, IRET
@@ -108,8 +108,8 @@
 2348, 10, context saved
 2358, 25, find vector 11 in memory position 0x0016
 2383, 1, load address 0x07B0 into the PC
-2384, 358, SYSCALL: run the ISR
-2742, 206, transfer data
+2384, 393, SYSCALL: run the ISR
+2777, 171, transfer data
 2948, 10, context returned
 2958, 1, switch to user mode
 2959, 1, IRET
@@ -129,8 +129,8 @@
 3116, 10, context saved
 3126, 25, find vector 16 in memory position 0x0020
 3151, 1, load address 0x0584 into the PC
-3152, 35, SYSCALL: run the ISR
-3187, 33, transfer data
+3152, 43, SYSCALL: run the ISR
+3195, 25, transfer data
 3220, 10, context returned
 3230, 1, switch to user mode
 3231, 1, IRET
@@ -150,8 +150,8 @@
 3340, 10, context saved
 3350, 25, find vector 2 in memory position 0x0004
 3375, 1, load address 0x029C into the PC
-3376, 69, SYSCALL: run the ISR
-3445, 31, transfer data
+3376, 60, SYSCALL: run the ISR
+3436, 40, transfer data
 3476, 10, context returned
 3486, 1, switch to user mode
 3487, 1, IRET
@@ -171,8 +171,8 @@
 3606, 10, context saved
 3616, 25, find vector 16 in memory position 0x0020
 3641, 1, load address 0x0584 into the PC
-3642, 38, SYSCALL: run the ISR
-3680, 30, transfer data
+3642, 51, SYSCALL: run the ISR
+3693, 17, transfer data
 3710, 10, context returned
 3720, 1, switch to user mode
 3721, 1, IRET
@@ -192,8 +192,8 @@
 3883, 10, context saved
 3893, 25, find vector 16 in memory position 0x0020
 3918, 1, load address 0x0584 into the PC
-3919, 46, SYSCALL: run the ISR
-3965, 22, transfer data
+3919, 44, SYSCALL: run the ISR
+3963, 24, transfer data
 3987, 10, context returned
 3997, 1, switch to user mode
 3998, 1, IRET
@@ -213,8 +213,8 @@
 4255, 10, context saved
 4265, 25, find vector 17 in memory position 0x0022
 4290, 1, load address 0x02DF into the PC
-4291, 564, SYSCALL: run the ISR
-4855, 392, transfer data
+4291, 527, SYSCALL: run the ISR
+4818, 429, transfer data
 5247, 10, context returned
 5257, 1, switch to user mode
 5258, 1, IRET
@@ -234,8 +234,8 @@
 5381, 10, context saved
 5391, 25, find vector 1 in memory position 0x0002
 5416, 1, load address 0x01E3 into the PC
-5417, 61, SYSCALL: run the ISR
-5478, 49, transfer data
+5417, 63, SYSCALL: run the ISR
+5480, 47, transfer data
 5527, 10, context returned
 5537, 1, switch to user mode
 5538, 1, IRET
@@ -255,8 +255,8 @@
 5638, 10, context saved
 5648, 25, find vector 19 in memory position 0x0026
 5673, 1, load address 0x060A into the PC
-5674, 64, SYSCALL: run the ISR
-5738, 59, transfer data
+5674, 86, SYSCALL: run the ISR
+5760, 37, transfer data
 5797, 10, context returned
 5807, 1, switch to user mode
 5808, 1, IRET
@@ -276,8 +276,8 @@
 5948, 10, context saved
 5958, 25, find vector 8 in memory position 0x0010
 5983, 1, load address 0x00BD into the PC
-5984, 101, SYSCALL: run the ISR
-6085, 51, transfer data
+5984, 77, SYSCALL: run the ISR
+6061, 75, transfer data
 6136, 10, context returned
 6146, 1, switch to user mode
 6147, 1, IRET
@@ -297,8 +297,8 @@
 6311, 10, context saved
 6321, 25, find vector 15 in memory position 0x001E
 6346, 1, load address 0x0165 into the PC
-6347, 286, SYSCALL: run the ISR
-6633, 170, transfer data
+6347, 263, SYSCALL: run the ISR
+6610, 193, transfer data
 6803, 10, context returned
 6813, 1, switch to user mode
 6814, 1, IRET
@@ -318,8 +318,8 @@
 7020, 10, context saved
 7030, 25, find vector 11 in memory position 0x0016
 7055, 1, load address 0x07B0 into the PC
-7056, 401, SYSCALL: run the ISR
-7457, 163, transfer data
+7056, 376, SYSCALL: run the ISR
+7432, 188, transfer data
 7620, 10, context returned
 7630, 1, switch to user mode
 7631, 1, IRET
@@ -339,8 +339,8 @@
 7808, 10, context saved
 7818, 25, find vector 16 in memory position 0x0020
 7843, 1, load address 0x0584 into the PC
-7844, 44, SYSCALL: run the ISR
-7888, 24, transfer data
+7844, 37, SYSCALL: run the ISR
+7881, 31, transfer data
 7912, 10, context returned
 7922, 1, switch to user mode
 7923, 1, IRET
@@ -381,8 +381,8 @@
 8320, 10, context saved
 8330, 25, find vector 2 in memory position 0x0004
 8355, 1, load address 0x029C into the PC
-8356, 50, SYSCALL: run the ISR
-8406, 50, transfer data
+8356, 58, SYSCALL: run the ISR
+8414, 42, transfer data
 8456, 10, context returned
 8466, 1, switch to user mode
 8467, 1, IRET
@@ -402,8 +402,8 @@
 8601, 10, context saved
 8611, 25, find vector 12 in memory position 0x0018
 8636, 1, load address 0x01F8 into the PC
-8637, 323, SYSCALL: run the ISR
-8960, 200, transfer data
+8637, 315, SYSCALL: run the ISR
+8952, 208, transfer data
 9160, 10, context returned
 9170, 1, switch to user mode
 9171, 1, IRET
@@ -423,8 +423,8 @@
 9399, 10, context saved
 9409, 25, find vector 18 in memory position 0x0024
 9434, 1, load address 0x05B3 into the PC
-9435, 148, SYSCALL: run the ISR
-9583, 87, transfer data
+9435, 118, SYSCALL: run the ISR
+9553, 117, transfer data
 9670, 10, context returned
 9680, 1, switch to user mode
 9681, 1, IRET
@@ -444,8 +444,8 @@
 9809, 10, context saved
 9819, 25, find vector 1 in memory position 0x0002
 9844, 1, load address 0x01E3 into the PC
-9845, 59, SYSCALL: run the ISR
-9904, 51, transfer data
+9845, 64, SYSCALL: run the ISR
+9909, 46, transfer data
 9955, 10, context returned
 9965, 1, switch to user mode
 9966, 1, IRET
@@ -465,8 +465,8 @@
 10137, 10, context saved
 10147, 25, find vector 4 in memory position 0x0008
 10172, 1, load address 0x042B into the PC
-10173, 153, SYSCALL: run the ISR
-10326, 147, transfer data
+10173, 212, SYSCALL: run the ISR
+10385, 88, transfer data
 10473, 10, context returned
 10483, 1, switch to user mode
 10484, 1, IRET
@@ -486,8 +486,8 @@
 10676, 10, context saved
 10686, 25, find vector 18 in memory position 0x0024
 10711, 1, load address 0x05B3 into the PC
-10712, 146, SYSCALL: run the ISR
-10858, 89, transfer data
+10712, 123, SYSCALL: run the ISR
+10835, 112, transfer data
 10947, 10, context returned
 10957, 1, switch to user mode
 10958, 1, IRET
@@ -507,8 +507,8 @@
 11146, 10, context saved
 11156, 25, find vector 16 in memory position 0x0020
 11181, 1, load address 0x0584 into the PC
-11182, 48, SYSCALL: run the ISR
-11230, 20, transfer data
+11182, 45, SYSCALL: run the ISR
+11227, 23, transfer data
 11250, 10, context returned
 11260, 1, switch to user mode
 11261, 1, IRET
@@ -528,8 +528,8 @@
 11419, 10, context saved
 11429, 25, find vector 10 in memory position 0x0014
 11454, 1, load address 0x036C into the PC
-11455, 103, SYSCALL: run the ISR
-11558, 53, transfer data
+11455, 102, SYSCALL: run the ISR
+11557, 54, transfer data
 11611, 10, context returned
 11621, 1, switch to user mode
 11622, 1, IRET
@@ -549,8 +549,8 @@
 11819, 10, context saved
 11829, 25, find vector 11 in memory position 0x0016
 11854, 1, load address 0x07B0 into the PC
-11855, 295, SYSCALL: run the ISR
-12150, 269, transfer data
+11855, 415, SYSCALL: run the ISR
+12270, 149, transfer data
 12419, 10, context returned
 12429, 1, switch to user mode
 12430, 1, IRET
@@ -570,8 +570,8 @@
 12627, 10, context saved
 12637, 25, find vector 6 in memory position 0x000C
 12662, 1, load address 0x048B into the PC
-12663, 141, SYSCALL: run the ISR
-12804, 70, transfer data
+12663, 133, SYSCALL: run the ISR
+12796, 78, transfer data
 12874, 10, context returned
 12884, 1, switch to user mode
 12885, 1, IRET
@@ -591,8 +591,8 @@
 13023, 10, context saved
 13033, 25, find vector 5 in memory position 0x000A
 13058, 1, load address 0x0292 into the PC
-13059, 136, SYSCALL: run the ISR
-13195, 114, transfer data
+13059, 155, SYSCALL: run the ISR
+13214, 95, transfer data
 13309, 10, context returned
 13319, 1, switch to user mode
 13320, 1, IRET
@@ -612,8 +612,8 @@
 13481, 10, context saved
 13491, 25, find vector 4 in memory position 0x0008
 13516, 1, load address 0x042B into the PC
-13517, 161, SYSCALL: run the ISR
-13678, 139, transfer data
+13517, 166, SYSCALL: run the ISR
+13683, 134, transfer data
 13817, 10, context returned
 13827, 1, switch to user mode
 13828, 1, IRET
